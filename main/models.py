@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+import uuid
 # from datetime import datetime
 # Create your models here.
 
@@ -16,6 +17,7 @@ class Category(models.Model):
         verbose_name_plural = "Kategoriyalar"
     
 class Test(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="avtor")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="kategoriya")
     title = models.CharField(max_length=250, verbose_name="sarlavha")

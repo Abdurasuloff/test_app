@@ -168,3 +168,15 @@ def my_results(request):
             tests.append(checktest.test)
             
     return render(request, "my_results.html", {'tests':tests, "checktests":check_tests})
+
+@login_required(login_url='login')
+def results(request, test_id):
+    test = Test.objects.get(id=test_id)
+    if request.user == test.author:
+        checktests = CheckTest.objects.filter(test=test)
+        return render(request, "results.html", {"checktests":checktests, "test":test})
+    else:
+        messages.error(request, "Siz bu testni yaratmagansiz.")
+        return redirect("index")
+        
+
