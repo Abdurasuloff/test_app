@@ -18,4 +18,3 @@ urlpatterns = [
     path("results/<int:test_id>", results, name="results"),
     path("checktest/<int:checktest_id>", check_test, name="check_test"),
 ]
-    

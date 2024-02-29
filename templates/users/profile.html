@@ -32,7 +32,6 @@
                 <div class="card-body">
                     <ol class="list-group list-group">
                         {% for test in tests %}
-                        
                             <a style="text-decoration: none;" data-bs-toggle="collapse" href="#collapse{{test.id}}" role="button" aria-expanded="false" aria-controls="collapse{{test.id}}">
                                 <li class="list-group-item">
                                     <div class="ms-2 me-auto">
@@ -44,16 +43,18 @@
                           <div class="collapse" id="collapse{{test.id}}">
                             <div class="card card-body">
                                 <ul class="list-group">
-                                    {% for checktest in test.checktests.all  %}
-                                        <a style="text-decoration: none;" href="{% url 'check_test' checktest.id %}">
-                                            {% if checktest.is_passed %}
-                                            <li style="background-color: rgba(40, 128, 16, 0.499);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
-                                            </li>
-                                            {% else %}
-                                            <li style="background-color: rgba(255, 0, 0, 0.37);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
-                                            </li>
-                                            {% endif %}
-                                        </a>
+                                    {% for checktest in test.checktests.all %}
+                                        {% if checktest.student == request.user %}
+                                            <a style="text-decoration: none;" href="{% url 'check_test' checktest.id %}">
+                                                {% if checktest.is_passed %}
+                                                <li style="background-color: rgba(40, 128, 16, 0.499);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
+                                                </li>
+                                                {% else %}
+                                                <li style="background-color: rgba(255, 0, 0, 0.37);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
+                                                </li>
+                                                {% endif %}
+                                            </a>
+                                        {% endif %}
                                     {% endfor %}
                                     
                                   </ul>
