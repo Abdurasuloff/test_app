@@ -24,6 +24,7 @@
                     <div class="card card-body">
                         <ul class="list-group">
                             {% for checktest in test.checktests.all  %}
+                                {% if checktest.student == request.user %}
                                 <a style="text-decoration: none;" href="{% url 'check_test' checktest.id %}">
                                     {% if checktest.is_passed %}
                                     <li style="background-color: rgba(40, 128, 16, 0.499);" class="list-group-item"><b>Sana:</b> {{checktest.date}} |  <b>Foiz:</b> {{checktest.percentage}} %
@@ -33,6 +34,7 @@
                                     </li>
                                     {% endif %}
                                 </a>
+                                {% endif %}
                             {% endfor %}
                             
                           </ul>
