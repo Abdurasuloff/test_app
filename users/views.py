@@ -82,7 +82,7 @@ def update_user(request):
         if form.is_valid() and profileForm.is_valid():
             form.save()
             profileForm.save()
-            return redirect('profile', user.id)
+            return redirect('profile', user.username)
         else:
             return render(request, "users/user_update.html", {'form':form, "profileForm":profileForm})
     return render(request, "users/user_update.html", {'form':form, "profileForm":profileForm})
